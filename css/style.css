@@ -189,7 +189,7 @@ hero,profile,expertise,experience,projects,contact,footer{
 }
 /*-------------------------------------------Menu--------------------------------------------------------*/
 
-.navbar  {border: 0px;background-color: #ffa500;position: absolute;top: 100%;right: 5%;width: 110px;z-index: 1;padding:  0;text-align: center;}
+.navbar  {border: 0px;background-color: #ffa500;position: absolute;top: 100%;right: 5%;width: 110px;z-index: 1;padding:  0;text-align: center;z-index: 2;}
 .navbar .navbar-nav {float: none;width:  100%;}
 .navbar .nav > li a { display: block;  height: 80px; text-align: center; font-weight: 600; color: #FFFFFF; }
 
@@ -593,6 +593,11 @@ footer span:hover i{
 }
 
 @media screen and (min-width: 576px) and (max-width: 767px){
+  .hero,.hero-image {
+    max-height: 500px;
+    min-height: 500px;
+    float: left;
+  } 
   .hero h1 span{
     display: block;
   }
@@ -601,6 +606,9 @@ footer span:hover i{
   }
   .hero p{
     font-size: 22px;
+  }
+  .container{
+    padding: 30px 100px;
   }
   .line{
     top:40%;
@@ -617,8 +625,42 @@ footer span:hover i{
   }
   button.navbar-toggler {
     display: block;
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+    outline:  none;
   }
+  .navbar-toggler-icon{
+    width: 100%;
+    position: relative;
+    height: auto;
+    font-size: 30px;
+    color: #252a30;
+  }
+  #expertise .expertise-block {margin:10% 0;}
+  .navbar {width: 80px;right: 2%;}
+  .nav-pills .nav-link{border-radius: 0;}
+  .hovereffect:hover img{opacity: 0.1;}
+  .navbar li {font-size: 16px;}
   .collapse{display: none;}
+  .scroll-down .fa, .scroll-up .fa {font-size: 20px;padding-top: 0px;}
+  .scroll-down, .scroll-up {height: 35px;width: 80px;right: 2%;}
+  @keyframes wiggle {
+    0% {
+      padding-top: 5px;
+    }
+
+    50% {
+      padding-top: 15px;
+    }
+
+    100% {
+      padding-top: 5px;
+    }
+  }
+  figcaption p{font-size: 12px;margin:0 }
+  footer span i {width: 6vw;font-size: 3vw !important;}
+  .fa.fa-diamond.filled, .fa.fa-magic.filled, .fa.fa-code.filled {font-size: 14vw;}
 }
 
 @media screen and (max-width: 575px){
@@ -653,15 +695,16 @@ footer span:hover i{
     position: relative;
     height: auto;
     font-size: 30px;
+    color: #252a30;
   }
   .nav-pills .nav-link{border-radius: 0;}
   .hovereffect:hover img{opacity: 0.1;}
   .navbar li {font-size: 16px;}
   .collapse{display: none;}
-  .navbar {width: 80px;}
+  .navbar {width: 80px; right:0;}
   .fixed .navbar{top:400px;z-index: 99999;/* top: 400px !important; */}
   .scroll-down .fa, .scroll-up .fa {font-size: 20px;padding-top: 0px;}
-  .scroll-down, .scroll-up {height: 35px;width: 80px;}
+  .scroll-down, .scroll-up {height: 35px;width: 80px;right:0;}
   @keyframes wiggle {
     0% {
       padding-top: 5px;
