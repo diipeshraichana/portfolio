@@ -3,7 +3,7 @@
 		var d1 = new Date("05/01/1990");
 	    d2 = Date.now();
 	    var diff = d2 - d1;
-	    var age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
+	    var age = Math.ceil(diff / (1000 * 60 * 60 * 24 * 365.25));
 	    $(".personalDetails p span").text(age);
 	}
 	var bindEvents = function() {
