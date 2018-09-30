@@ -63,9 +63,6 @@
 		getAge();
 		applyScrollSpy();
 		bindEvents();
-		console.log("%c¯\\_(ツ)_/¯", "color: blue; font-size: 70px");
-		console.log("%cThere's nothing here...", "color: blue; font-size: 20px");
-		console.log("%cHey.. Close this window if you'r not aware about it!!", "color: red; font-size: 20px");
 	});
 	$(window).on('DOMContentLoaded load resize scroll', navBarPositionHandler); 
 })();

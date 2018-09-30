@@ -54,7 +54,8 @@ hero,profile,expertise,experience,projects,contact,footer{
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-transition: color 0.2s 0.3s, background-color 0.3s ease-in-out, width 0.3s 0s;
 	transition: color 0.2s 0.3s, background-color 0.3s ease-in-out, width 0.3s 0s;
-	outline: none;
+  outline: none;
+  cursor: pointer;
 }
 .btn-primary:hover{
 	color: #fff;
