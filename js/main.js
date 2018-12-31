@@ -19,6 +19,14 @@
 		    },500);
 		    $(".navbar-toggler").trigger("click");
 		});
+		$("#my-form").submit(function(e) {
+  e.preventDefault();
+
+  var $form = $("form");
+  $.post($form.attr("action"), $form.serialize()).then(function() {
+    alert("Thank you!");
+  });
+});
 	}
 	function applyScrollSpy() {
 		$('.navbar').on('activate.bs.scrollspy', function() 
