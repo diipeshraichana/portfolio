@@ -49,6 +49,7 @@ const Footer = (props) => {
                 </li>
               </ul>
             </div>
+            <div><a href="https://diipeshraichana.github.io/portfolio-v1/" target="_blank">Old Portfolio</a></div>
           </Fade>
 
           <div id="go-top">
