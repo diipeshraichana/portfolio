@@ -5,11 +5,11 @@ let id = 0;
 const Portfolio = (props) => {
   const [data, setData] = useState(props.data);
 
-  useEffect(() => {
+  useEffect((data) => {
     if (data) {
       setData(data);
     }
-  }, [data])
+  }, [])
 
   return (
     <>
@@ -17,30 +17,31 @@ const Portfolio = (props) => {
         <section id="portfolio">
           <Fade left duration={1000} distance="40px">
             <div className="row">
-              <div className="twelve columns collapsed">
+              <div className="twelve columns collapsed" key={id++}>
                 <h1>Check Out Some of My Recent Works.</h1>
                 {
                   data.projects.map(function (project) {
                     const projectImage = "images/portfolio/" + project?.image;
 
                     return (
-                      <>
-                        <div key={id++} className="six columns portfolio-item">
-                          <projects id="projects">
-                            <div class="container">
+                      <React.Fragment key={project?.title}>
+                        <div className="six columns portfolio-item">
+                          <div id="projects">
+                            <div className="container">
                               <div className="item-wrap">
                                 {/* <Zmage alt={project?.title} src={projectImage} />
                               <div style={{ textAlign: "center" }}>{project?.title}</div> */}
-                                <figure class="hovereffect">
-                                  <img src={projectImage} alt={project?.title} class="img-responsive" />
+                                <figure className="hovereffect">
+                                  <img src={projectImage} alt={project?.title} className="img-responsive" />
                                   <figcaption>
                                     <h3>{project?.title}</h3>
                                     <p>{project?.description}</p>
                                     <p><strong>Tags:</strong> <br />{project?.tags}</p>
                                     {project?.url &&
                                       <>
-                                        <a href={project?.url} target="_blank" rel="noreferrer">View more</a><span class="icon">
-                                          <span class="fa fa-external-link"></span>
+                                        <a href={project?.url} target="_blank" rel="noreferrer">View more</a>
+                                        <span className="icon">
+                                          <span className="fa fa-external-link"></span>
                                         </span>
                                       </>
                                     }
@@ -48,9 +49,9 @@ const Portfolio = (props) => {
                                 </figure>
                               </div>
                             </div>
-                          </projects>
+                          </div>
                         </div>
-                      </>
+                      </React.Fragment>
                     );
                   })
                 }

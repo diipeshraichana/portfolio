@@ -3,7 +3,6 @@ import Fade from "react-reveal";
 
 const About = (props) => {
   const [data, setData] = useState(props.data);
-  const [profilePic, setProfilePic] = useState(null);
   const [years, setYears] = useState(null);
 
   // const name = props.data.name;
@@ -17,7 +16,6 @@ const About = (props) => {
 
   useEffect(() => {
     if (data) {
-      setProfilePic(`images/${data?.image}`);
       const years = getDifferenceOfDate(new Date(data?.startDate), new Date());
       const age = getDifferenceOfDate(new Date(data.birthDate), new Date());
       setYears(years);
@@ -27,7 +25,7 @@ const About = (props) => {
         age: age
       });
     }
-  }, []);
+  }, []); 
 
   const getDifferenceOfDate = (startDate, endDate) => {
     return (endDate.getFullYear() - startDate.getFullYear());
@@ -41,7 +39,7 @@ const About = (props) => {
             <div className="three columns">
               <img
                 className="profile-pic"
-                src={profilePic}
+                src={`images/${data?.image}`}
                 alt="Dipesh profile"
               />
               <div className="twelve columns" style={{ textAlign: "center" }}>

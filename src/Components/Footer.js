@@ -49,11 +49,11 @@ const Footer = (props) => {
                 </li>
               </ul>
             </div>
-            <div><a href="https://diipeshraichana.github.io/portfolio-v1/" target="_blank">Old Portfolio</a></div>
+            <div><a href="https://diipeshraichana.github.io/portfolio-v1/" target="_blank" rel="noreferrer">Old Portfolio</a></div>
           </Fade>
 
           <div id="go-top">
-            <a className="smoothscroll" title="Back to Top" href="#home">
+            <a className="smoothscroll" title="Back to Top" href="#home" rel="noreferrer">
               <i className="icon-up-open"></i>
             </a>
           </div>

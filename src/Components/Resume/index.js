@@ -8,7 +8,6 @@ const Resume = (props) => {
 
     useEffect(() => {
         if (data) {
-            console.log(data?.skill)
             setData(data);
         }
     }, [data])

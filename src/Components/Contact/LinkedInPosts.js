@@ -18,7 +18,7 @@ const LinkedInPosts = () => {
         <>
            { posts && <div className="widget widget_tweets">
                 <h4 className="widget-title">Latest Tweets</h4>
-                <a class="twitter-timeline" href="https://twitter.com/DiipeshRaichana?ref_src=twsrc%5Etfw">Tweets by DiipeshRaichana</a>
+                <a className="twitter-timeline" href="https://twitter.com/DiipeshRaichana?ref_src=twsrc%5Etfw">Tweets by DiipeshRaichana</a>
             </div>}
         </>
     )

@@ -12,7 +12,7 @@ npm start
 npm run build
 ```
 
-### 4. o deploy your React app to GitHub Pages, you must push this directory to a particular branch called gh-pages. add following script into package.json file
+### 4. To deploy your React app to GitHub Pages, you must push this directory to a particular branch called gh-pages. add following script into package.json file
 "scripts": {
   "predeploy": "npm run build",
   "deploy": "gh-pages -d build"

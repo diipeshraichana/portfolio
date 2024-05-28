@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Slide } from "react-reveal"
 
 const Skill = (props) => {
@@ -18,7 +18,6 @@ const Skill = (props) => {
         if (props?.resume?.skillmessage) {
             setSkillsMessage(props?.resume?.skillmessage);
         }
-        console.log(props?.resume?.skillmessage)
     }, [props?.resume?.skillmessage]);
 
     useEffect(() => {
@@ -53,7 +52,7 @@ const Skill = (props) => {
                         </h1>
                         <p>{skillMessage}</p>
 
-                        {skills && <div>
+                        {skills && <div key={Date.now()}>
                             <ul className="skills">{
                                 skills.map((skill) => {
                                     // const backgroundColor = getRandomColor();
@@ -62,28 +61,27 @@ const Skill = (props) => {
                                     const width = skill.level;
 
                                     return (
-                                        <>
+                                        <React.Fragment key={skill.name}>
                                             {/* <li key={skill.name}>
                                                 <span style={{ width, backgroundColor }} className={className}></span>
                                                 <em>{skill.name}</em>
                                             </li> */}
-
-                                            <li key={skill.name}>
+                                            <li>
                                                 <div style={{ fontSize: "18px", width: "10px", display: "inline" }}><em>{skill.name}</em></div>
                                                 <div style={{ float: "right" }}>
-                                                <span className={`fa fa-star ${width >= 1 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 2 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 3 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 4 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 5 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 6 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 7 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 8 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 9 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 10 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 1 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 2 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 3 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 4 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 5 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 6 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 7 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 8 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 9 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 10 ? 'filled' : ''}`}></span>
                                                 </div>
                                             </li>
-                                        </>
+                                        </React.Fragment>
                                     )
                                 })
                             }</ul>
@@ -100,23 +98,23 @@ const Skill = (props) => {
                                 tools.map((tool) => {
                                     const width = tool.level;
                                     return (
-                                        <>
+                                        <React.Fragment key={tool.name}>
                                             <li key={tool.name}>
-                                            <div style={{ fontSize: "18px", width: "10px", display: "inline" }}><em>{tool.name}</em></div>
+                                                <div style={{ fontSize: "18px", width: "10px", display: "inline" }}><em>{tool.name}</em></div>
                                                 <div style={{ float: "right" }}>
-                                                <span className={`fa fa-star ${width >= 1 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 2 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 3 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 4 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 5 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 6 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 7 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 8 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 9 ? 'filled' : ''}`}></span>
-                                                <span className={`fa fa-star ${width >= 10 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 1 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 2 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 3 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 4 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 5 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 6 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 7 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 8 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 9 ? 'filled' : ''}`}></span>
+                                                    <span className={`fa fa-star ${width >= 10 ? 'filled' : ''}`}></span>
                                                 </div>
                                             </li>
-                                        </>
+                                        </React.Fragment>
                                     )
                                 })
                             }</ul>

@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Slide } from "react-reveal"
 
 const Work = (props) => {
-    const [work, setWork] = useState(props.work);
+    const [workObj, setWorkObj] = useState(props.work);
 
     useEffect(() => {
         if (props.work) {
-            setWork(props.work);
+            setWorkObj(props.work);
         }
     }, [props.work])
 
@@ -21,9 +21,9 @@ const Work = (props) => {
                     </div>
 
                     <div className="nine columns main-col">{
-                        work.map((work) => {
+                        workObj.map((work) => {
                             return (
-                                <>
+                                <React.Fragment key={work?.years}>
                                     <div key={work?.years}>
                                         <h3>{work?.company}</h3>
                                         <p className="info">
@@ -32,7 +32,7 @@ const Work = (props) => {
                                         </p>
                                         <p>{work?.description}</p>
                                     </div>
-                                </>
+                                </React.Fragment>
                             )
                         })
                     }</div>
