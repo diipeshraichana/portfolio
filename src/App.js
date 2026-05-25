@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReactGA from "react-ga";
 import "./App.css";
 import axios from "axios";
 import Header from "./Components/Header";
@@ -9,40 +8,58 @@ import Contact from "./Components/Contact/index";
 import Portfolio from "./Components/Portfolio";
 import Resume from "./Components/Resume/index";
 
-const App = (props) => {
-  const [resumeData, setResumeData ] = useState(null);
+const App = () => {
+  const [resumeData, setResumeData] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    ReactGA.initialize("UA-110570651-1");
-    ReactGA.pageview(window.location.pathname);
+    const getResumeData = async () => {
+      try {
+        const response = await axios.get("./resumeData.json");
+        setResumeData(response.data);
+      } catch (err) {
+        setError(err);
+      }
+    };
+
     getResumeData();
+
     console.clear();
-    console.log("%c¯\\_(ツ)_/¯", "color: blue; font-size: 70px");
-		console.log("%cThere's nothing here...", "color: blue; font-size: 20px");
-		console.log("%cHey.. Close this window if you'r not aware about it!!", "color: red; font-size: 20px");
-  }, [])
+    console.log(
+      "%cHi there 👋",
+      "color: #7ee787; font-size: 28px; font-weight: 700; font-family: 'JetBrains Mono', monospace;"
+    );
+    console.log(
+      "%cIf you're a recruiter, hiring manager, or fellow engineer poking around — welcome.",
+      "color: #c9d1d9; font-size: 14px; font-family: 'JetBrains Mono', monospace;"
+    );
+    console.log(
+      "%cReach out: diipeshraichana09@gmail.com  ·  https://www.linkedin.com/in/diipesh-raichana-091b6979",
+      "color: #79c0ff; font-size: 13px; font-family: 'JetBrains Mono', monospace;"
+    );
+  }, []);
 
-
-  const getResumeData = async () => {
-    const data = await axios.get('./resumeData.json');
-    setResumeData(data.data);
+  if (error) {
+    return (
+      <div style={{ padding: "40px", textAlign: "center" }}>
+        <h2>Something went wrong loading the portfolio.</h2>
+        <p>Please refresh the page or try again later.</p>
+      </div>
+    );
   }
 
+  if (!resumeData) return null;
+
   return (
-    <>
-    {
-      resumeData && 
-      <div className="App">
-        <Header data={resumeData.main} />
-        <About data={resumeData.main} />
-        <Resume data={resumeData.resume} />
-        <Portfolio data={resumeData.portfolio} />
-        <Contact data={resumeData.main} />
-        <Footer data={resumeData.main} />
-      </div>
-    }
-    </>
-    );
-}
+    <div className="App">
+      <Header data={resumeData.main} />
+      <About data={resumeData.main} />
+      <Resume data={resumeData.resume} />
+      <Portfolio data={resumeData.portfolio} />
+      <Contact data={resumeData.main} />
+      <Footer data={resumeData.main} />
+    </div>
+  );
+};
 
 export default App;

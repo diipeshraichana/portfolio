@@ -1,35 +1,31 @@
 import React, { useEffect, useState } from "react";
 import Fade from "react-reveal";
 
+const getYearsBetween = (startDate, endDate) => {
+  let diff = endDate.getFullYear() - startDate.getFullYear();
+  const monthDiff = endDate.getMonth() - startDate.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && endDate.getDate() < startDate.getDate())) {
+    diff -= 1;
+  }
+  return diff;
+};
+
 const About = (props) => {
   const [data, setData] = useState(props.data);
   const [years, setYears] = useState(null);
 
-  // const name = props.data.name;
-  // const street = props.data.address.street;
-  // const city = props.data.address.city;
-  // const state = props.data.address.state;
-  // const zip = props.data.address.zip;
-  // const phone = props.data.phone;
-  // const email = props.data.email;
-  // const resumeDownload = props.data.resumedownload;
-
   useEffect(() => {
-    if (data) {
-      const years = getDifferenceOfDate(new Date(data?.startDate), new Date());
-      const age = getDifferenceOfDate(new Date(data.birthDate), new Date());
-      setYears(years);
-      setData({
-        ...data,
-        bio: data?.bio.replace("%s", years.toString()),
-        age: age
-      });
-    }
-  }, []); 
-
-  const getDifferenceOfDate = (startDate, endDate) => {
-    return (endDate.getFullYear() - startDate.getFullYear());
-  }
+    if (!props.data) return;
+    const now = new Date();
+    const yearsOfExperience = getYearsBetween(new Date(props.data.startDate), now);
+    const age = getYearsBetween(new Date(props.data.birthDate), now);
+    setYears(yearsOfExperience);
+    setData({
+      ...props.data,
+      bio: (props.data.bio || "").replace("%s", yearsOfExperience.toString()),
+      age,
+    });
+  }, [props.data]);
 
   return (
     <>
@@ -40,11 +36,13 @@ const About = (props) => {
               <img
                 className="profile-pic"
                 src={`images/${data?.image}`}
-                alt="Dipesh profile"
+                alt={`${data?.name} — ${data?.description}`}
               />
               <div className="twelve columns" style={{ textAlign: "center" }}>
-                <div>{`${data?.age} Years`}</div>
-                <ul className="social-links" style={{ display: "inline-flex", margin: 0 }}>{
+                {years != null && (
+                  <div style={{ fontWeight: 600, marginTop: "10px" }}>{years}+ Years Experience</div>
+                )}
+                <ul className="social-links" style={{ display: "inline-flex", margin: 0, justifyContent: "center" }}>{
                   data.social.map(function (network) {
                     return (
                       <li key={network.name} style={{ padding: "0px 10px" }}>
@@ -60,24 +58,33 @@ const About = (props) => {
             <div className="nine columns main-col">
               <h2>About Me</h2>
               <p>{data?.bio}</p>
+
+              {data?.availability && (
+                <p className="availability-badge" aria-label="Open to opportunities">
+                  <span className="availability-dot" aria-hidden="true"></span>
+                  {data.availability}
+                </p>
+              )}
+
+              {data?.credentials && (
+                <p className="credentials">
+                  <span className="credentials-label">Credentials</span>
+                  <span>{data.credentials}</span>
+                </p>
+              )}
+
               <div className="row">
                 <div className="columns contact-details">
-                  {/* <h2>Contact Details</h2> */}
                   <p className="address">
-                    {
-                      data?.address && <span>
-                        {/*{data?.address?.name}</span>
-                    <br />
-                     <span>
-                      {data?.address?.street}
-                      <br />*/}
-                        {`${data?.address?.city}, ${data?.address?.state}, ${data?.address?.zip}`}
+                    {data?.address && (
+                      <span>
+                        {[data.address.city, data.address.state, data.address.zip].filter(Boolean).join(", ")}
                       </span>
-                    }
+                    )}
                     <br />
-                    {data?.phone && <a href={`tel:${data?.phone}`}>{data?.phone}</a>}
+                    {data?.phone && <a href={`tel:${data.phone.replace(/\s+/g, "")}`}>{data.phone}</a>}
                     <br />
-                    {data?.email && <a href={`mailto:${data?.email}`}>{data?.email}</a>}
+                    {data?.email && <a href={`mailto:${data.email}`}>{data.email}</a>}
                   </p>
                 </div>
                 <div className="columns download">

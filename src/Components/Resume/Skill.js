@@ -1,128 +1,77 @@
-import React, { useEffect, useState } from "react";
-import { Slide } from "react-reveal"
+import React from "react";
+import { Slide } from "react-reveal";
+
+const GROUP_LABELS = {
+    daily: "Daily",
+    recent: "Recent",
+    earlier: "Earlier",
+};
+const GROUP_ORDER = ["daily", "recent", "earlier"];
+
+const Pills = ({ items, variant }) => (
+    <ul className={`skill-pills variant-${variant}`}>
+        {items.map((name) => (
+            <li key={name} className="skill-pill">{name}</li>
+        ))}
+    </ul>
+);
+
+const SkillGroup = ({ groupKey, items }) => {
+    if (!items || items.length === 0) return null;
+    return (
+        <div className="skill-group">
+            <span className={`skill-group-label group-${groupKey}`}>
+                {GROUP_LABELS[groupKey] || groupKey}
+            </span>
+            <Pills items={items} variant={groupKey} />
+        </div>
+    );
+};
+
+const normaliseSkills = (skills) => {
+    if (!skills) return [];
+    if (Array.isArray(skills)) {
+        return [{ key: "all", items: skills.map((s) => (typeof s === "string" ? s : s.name)) }];
+    }
+    return GROUP_ORDER
+        .filter((key) => Array.isArray(skills[key]) && skills[key].length > 0)
+        .map((key) => ({ key, items: skills[key] }));
+};
+
+const normaliseTools = (tools) =>
+    (tools || []).map((t) => (typeof t === "string" ? t : t.name));
 
 const Skill = (props) => {
-    const [skills, setSkills] = useState(props?.resume?.skills);
-    const [tools, setTools] = useState(props?.resume?.tools);
-    const [skillMessage, setSkillsMessage] = useState(props?.resume?.skillmessage);
-    const [toolsMessage, setToolsMessage] = useState(props?.resume?.toolmessage);
-
-    useEffect(() => {
-        if (props?.resume?.skills) {
-            setSkills(props?.resume?.skills);
-        }
-    }, [props?.resume?.skills]);
-
-
-    useEffect(() => {
-        if (props?.resume?.skillmessage) {
-            setSkillsMessage(props?.resume?.skillmessage);
-        }
-    }, [props?.resume?.skillmessage]);
-
-    useEffect(() => {
-        if (props?.resume?.tools) {
-            setTools(props?.resume?.tools);
-        }
-    }, [props?.resume?.tools]);
-
-
-    useEffect(() => {
-        if (props?.resume?.toolmessage) {
-            setToolsMessage(props?.resume?.toolmessage);
-        }
-    }, [props?.resume?.toolmessage]);
-
-    // const getRandomColor = () => {
-    //     let letters = "0123456789ABCDEF";
-    //     let color = "#";
-    //     for (let i = 0; i < 6; i++) {
-    //         color += letters[Math.floor(Math.random() * 16)];
-    //     }
-    //     return color;
-    // }
+    const skillGroups = normaliseSkills(props?.resume?.skills);
+    const tools = normaliseTools(props?.resume?.tools);
+    const skillMessage = props?.resume?.skillmessage;
+    const toolsMessage = props?.resume?.toolmessage;
 
     return (
-        <>
-            <Slide left duration={1300}>
-                <div className="row skill">
-                    <div className="six columns header-col">
-                        <h1>
-                            <span>Skills</span>
-                        </h1>
-                        <p>{skillMessage}</p>
-
-                        {skills && <div key={Date.now()}>
-                            <ul className="skills">{
-                                skills.map((skill) => {
-                                    // const backgroundColor = getRandomColor();
-                                    // const className = "bar-expand " + skill.name.toLowerCase();
-                                    // const width = skill.level;
-                                    const width = skill.level;
-
-                                    return (
-                                        <React.Fragment key={skill.name}>
-                                            {/* <li key={skill.name}>
-                                                <span style={{ width, backgroundColor }} className={className}></span>
-                                                <em>{skill.name}</em>
-                                            </li> */}
-                                            <li>
-                                                <div style={{ fontSize: "18px", width: "10px", display: "inline" }}><em>{skill.name}</em></div>
-                                                <div style={{ float: "right" }}>
-                                                    <span className={`fa fa-star ${width >= 1 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 2 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 3 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 4 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 5 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 6 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 7 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 8 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 9 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 10 ? 'filled' : ''}`}></span>
-                                                </div>
-                                            </li>
-                                        </React.Fragment>
-                                    )
-                                })
-                            }</ul>
-                        </div>}
-                    </div>
-                    <div className="six columns header-col">
-                        <h1>
-                            <span>Tools</span>
-                        </h1>
-                        <p>{toolsMessage}</p>
-
-                        {tools && <div>
-                            <ul className="tools">{
-                                tools.map((tool) => {
-                                    const width = tool.level;
-                                    return (
-                                        <React.Fragment key={tool.name}>
-                                            <li key={tool.name}>
-                                                <div style={{ fontSize: "18px", width: "10px", display: "inline" }}><em>{tool.name}</em></div>
-                                                <div style={{ float: "right" }}>
-                                                    <span className={`fa fa-star ${width >= 1 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 2 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 3 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 4 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 5 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 6 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 7 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 8 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 9 ? 'filled' : ''}`}></span>
-                                                    <span className={`fa fa-star ${width >= 10 ? 'filled' : ''}`}></span>
-                                                </div>
-                                            </li>
-                                        </React.Fragment>
-                                    )
-                                })
-                            }</ul>
-                        </div>}
-                    </div>
+        <Slide left duration={1300}>
+            <div className="row skill">
+                <div className="twelve columns header-col">
+                    <h1>
+                        <span>Skills</span>
+                    </h1>
+                    {skillMessage && <p className="section-blurb">{skillMessage}</p>}
+                    {skillGroups.map(({ key, items }) => (
+                        <SkillGroup key={key} groupKey={key} items={items} />
+                    ))}
                 </div>
-            </Slide>
-        </>
-    )
-}
+            </div>
+
+            <div className="row skill">
+                <div className="twelve columns header-col">
+                    <h1>
+                        <span>Tools</span>
+                    </h1>
+                    {toolsMessage && <p className="section-blurb">{toolsMessage}</p>}
+                    {tools.length > 0 && <Pills items={tools} variant="tools" />}
+                </div>
+            </div>
+        </Slide>
+    );
+};
+
 export default Skill;
