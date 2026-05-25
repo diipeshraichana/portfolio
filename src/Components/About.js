@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Fade from "react-reveal";
 
-const getYearsBetween = (startDate, endDate) => {
-  let diff = endDate.getFullYear() - startDate.getFullYear();
-  const monthDiff = endDate.getMonth() - startDate.getMonth();
-  if (monthDiff < 0 || (monthDiff === 0 && endDate.getDate() < startDate.getDate())) {
-    diff -= 1;
-  }
-  return diff;
-};
+// Calendar-year diff: matches "X+ years" convention used in the CV / meta tags.
+// June 2014 → May 2026 reads as "12+ years", not 11y 11m. The dynamic value here
+// must agree with the static "12+" in index.html meta + Header tagline.
+const getYearsBetween = (startDate, endDate) => endDate.getFullYear() - startDate.getFullYear();
 
 const About = (props) => {
   const [data, setData] = useState(props.data);

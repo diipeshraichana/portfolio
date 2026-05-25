@@ -110,7 +110,8 @@
     .skill-pill { font-size: 13px; padding: 5px 11px; }
 }
 
-/* ---------- About: availability + credentials ---------- */
+/* ---------- About + Contact: availability + credentials (dark-bg theme) ---------- */
+/* #about background = #000524, #contact background = #191919 — text must be light. */
 
 .availability-badge {
     display: inline-flex;
@@ -118,9 +119,9 @@
     gap: 10px;
     padding: 8px 14px;
     border-radius: 999px;
-    background: rgba(39, 201, 63, 0.08);
-    border: 1px solid rgba(39, 201, 63, 0.3);
-    color: #1f7a4a;
+    background: rgba(39, 201, 63, 0.14);
+    border: 1px solid rgba(126, 231, 135, 0.45);
+    color: #b8f5c3;
     font-size: 14px;
     font-weight: 500;
     margin: 4px 0 16px;
@@ -143,12 +144,13 @@
 
 .credentials {
     margin: 0 0 18px;
-    color: #555;
+    color: #c8cce0;
     font-size: 15px;
     display: flex;
     flex-wrap: wrap;
     align-items: baseline;
     gap: 10px;
+    line-height: 1.5;
 }
 .credentials-label {
     font-family: "JetBrains Mono", "SF Mono", Menlo, monospace;
@@ -156,14 +158,34 @@
     font-weight: 700;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #888;
+    color: #8b94b8;
+    padding: 2px 8px;
+    border: 1px solid rgba(139, 148, 184, 0.35);
+    border-radius: 4px;
 }
 
-.availability-text {
-    color: #2b2b2b;
+/* Contact section overrides — body bg is #191919, default text inherits #636363 */
+#contact p.lead {
+    color: #d6d6d6;
+}
+#contact .availability-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #c9d1d9;
     font-size: 14px;
     line-height: 1.5;
     margin: 6px 0 0;
+}
+#contact .availability-text::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #27c93f;
+    box-shadow: 0 0 0 0 rgba(39, 201, 63, 0.6);
+    animation: avail-pulse 2s ease-out infinite;
+    flex-shrink: 0;
 }
 
 /* ---------- Terminal: bullets ---------- */
@@ -171,6 +193,35 @@
 .t-bullet {
     color: #ffa657;
     font-weight: 700;
+}
+
+/* ---------- Footer (body bg is #0f0f0f from layout.css:25) ---------- */
+
+footer {
+    color: #b8bcc8;
+}
+footer a,
+footer a:visited {
+    color: #c8cce0;
+    text-decoration: underline;
+    text-decoration-color: rgba(200, 204, 224, 0.35);
+    text-underline-offset: 3px;
+}
+footer a:hover,
+footer a:focus {
+    color: #fff;
+    text-decoration-color: #fff;
+}
+
+/* copyright bullet separators were #095153 (almost invisible on near-black) */
+footer .copyright li:before {
+    color: #11ABB0;
+}
+
+/* "Old Portfolio" link sits in its own row — give it a little breathing room */
+footer .row > .twelve.columns:last-of-type a {
+    color: #c8cce0;
+    font-size: 13px;
 }
 
 /* ---------- Terminal-style Work timeline ---------- */
